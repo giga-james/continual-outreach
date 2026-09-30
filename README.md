@@ -4,6 +4,7 @@
   <img src="https://img.shields.io/badge/Agent-Independent-6366f1" alt="Agent independent">
   <img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white" alt="Python 3.9+">
   <img src="https://img.shields.io/badge/Status-Experimental-f4a7c3" alt="Experimental">
+  <a href="https://x.com/kunggaochicken"><img src="https://img.shields.io/badge/Follow-%40kunggaochicken-000000?logo=x&logoColor=white" alt="Follow @kunggaochicken on X"></a>
 </p>
 
 <p align="center"><strong>Bring your agent. Find your customers. Learn from every batch.</strong></p>
