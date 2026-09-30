@@ -21,9 +21,11 @@ Read [learning.md](references/learning.md) before planning a batch or updating a
 - **Send/resume:** follow [operations.md](references/operations.md). Check permissions,
   browser identity, account-wide history, local gate and recipient status before sending.
 - **Audit:** follow [audit.md](references/audit.md). Separate acceptance from useful feedback.
-- **Schedule:** read `prompts/daily.md` at the repository root. Read `docs/scheduling.md` for the portable runner and cron-entry generator, or use
-  available app automation tools. Reuse the existing scheduler; never create a second
-  sender. Install scheduling only when requested and verify it is active.
+- **Schedule:** own the setup using `docs/scheduling.md` and `prompts/daily.md` at the
+  repository root. Detect the runtime, generate configuration and verify capabilities
+  with a read-only probe. Reuse the existing scheduler or install and verify the requested
+  schedule. Ask for cadence or missing access, not routine command/configuration work.
+  Never create a second sender.
 
 ## State and honesty
 

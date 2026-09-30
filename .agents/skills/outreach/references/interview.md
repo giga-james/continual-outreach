@@ -38,3 +38,9 @@ non-LinkedIn channel, preserve the same authorization and outcome rules but use 
 channel's real recipient identity, limits, existing-contact status and tool workflow.
 The bundled send ledger currently validates LinkedIn URLs; other channels require a
 reviewed identity adapter before automated sending, not fabricated LinkedIn keys.
+
+Resolve whether the user wants recurring work and its cadence from the conversation;
+ask only if missing. When requested, complete agent-managed setup in `docs/scheduling.md`:
+detect the runtime, configure and verify it, then report the scheduler and next run.
+Do not hand off a configuration exercise to the user. If scheduling is not requested,
+finish interactive onboarding without installing a background job.

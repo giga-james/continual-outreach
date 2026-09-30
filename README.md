@@ -91,18 +91,21 @@ still decide whether it can run.
 
 ## Scheduling
 
-After onboarding, configure your agent command in the private campaign's `runner.json`.
-The runner supplies a prompt on stdin or through `{prompt_file}`, uses a checkout-wide
-lock, records each run and enforces a timeout. Failed runs are not automatically retried.
+Tell your agent:
 
-```sh
-python3 scripts/run_campaign.py --config campaigns/my-campaign/runner.json
-python3 scripts/cron_entry.py --config campaigns/my-campaign/runner.json --hour 9
-```
+> Keep this campaign running. Set up the schedule for me.
 
-The second command **prints a cron entry; it does not install it**. Use one scheduler
-per account. An agent app's scheduler is also supported. See
-[Scheduling](docs/scheduling.md) for configuration, environment requirements and recovery.
+The agent discovers its runtime, checks the tools available to scheduled sessions and
+sets up the appropriate scheduler. It reuses an existing schedule or configures its own
+launch command, writes the private runner configuration and verifies setup. You choose
+the cadence; **you do not need to assemble commands or edit configuration files**.
+
+When available, an app scheduler can retain the current session's tools. For CLI-based
+scheduling, the included runner supplies prompts, serializes local runs, saves logs and
+enforces timeouts. Failed runs are not automatically retried.
+
+If authentication or a required tool is missing, the agent asks for that specific step.
+See [Scheduling](docs/scheduling.md) for the agent setup procedure and manual reference.
 
 ## Capabilities and limits
 

@@ -26,3 +26,8 @@ ICP, outreach method/account, export destination, message/CTA and authorization 
 sends. Use `docs/exports.md` for tracking and `docs/scheduling.md` for unattended runs.
 Do not assume a desktop browser is available in a cron-launched CLI. Missing capabilities
 mean research/draft mode, with a concrete needs-input checkpoint, not fake completion.
+
+Scheduling setup is agent-owned: detect the current runtime, generate its configuration,
+probe scheduled capabilities without sending, and install/verify the requested schedule.
+Follow `docs/scheduling.md`. Ask users for cadence or missing access, not routine CLI
+configuration. Reuse existing schedulers and authorization.

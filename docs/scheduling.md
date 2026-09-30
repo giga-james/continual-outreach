@@ -3,37 +3,66 @@
 The repository owns campaign state, prompts and run reliability. The chosen agent owns
 research and browser/connector interaction. Cron wakes it; cron does not send messages.
 
-## Configure a runner
+## Agent-managed setup
 
-Finish interactive onboarding first. In the private campaign directory, create
-`runner.json` with a noninteractive agent command as an argv array:
+The agent owns scheduling setup. The user chooses whether to run continually and the
+cadence; do not ask them to assemble a CLI command or edit `runner.json`.
+Use existing preferences and authorization instead of asking again.
+
+1. Inspect the current agent environment and existing campaign scheduler. Reuse an
+   existing schedule. Prefer the current app's scheduler when it preserves the browser
+   and connector access this campaign needs; do not configure a CLI runner in that case.
+2. For a CLI-backed schedule, identify the current agent from session context and resolve
+   its installed executable. Read that installed version's help for noninteractive mode
+   and prompt input. Do not guess flags, select a different agent just because it is on
+   PATH, or assume CLI tool access matches the desktop session.
+3. Write `campaigns/<slug>/runner.json` yourself using an absolute executable path and
+   an argv array. If needed, create a small private wrapper beside it to forward stdin
+   or `{prompt_file}` in the documented format, run in the foreground and preserve exit
+   status. Keep normal permissions; do not disable approvals or store credentials.
+4. Probe the chosen command under the intended scheduler environment with a bounded,
+   read-only prompt instead of the daily outreach prompt. Verify repository/campaign
+   access, prompt delivery, exit status and the research/browser/export capabilities
+   needed for this campaign. No invitations, messages or live tracker writes during
+   setup validation. An exit code alone does not establish tool access.
+5. Record the detected runtime, resolved command, capability checks and remaining gaps
+   in the private checkpoint. Generate the cron entry with the bundled helper, then
+   install it when recurring work has been requested. Preserve unrelated entries and
+   verify the installed schedule, timezone and next run. Never create a second sender.
+
+If runtime detection is ambiguous, ask only which agent to use. If authentication or a
+required capability is missing, explain the specific action needed and retain research/
+draft mode. If an unusual runtime cannot be configured from available documentation,
+ask for its launch details as a fallback. Do not claim scheduling is active until verified.
+
+## Runner reference
+
+These are implementation details for the agent and advanced users. The agent generates
+this private file after discovering the actual executable and supported arguments:
 
 ```json
 {
-  "argv": ["/absolute/path/to/your-agent-wrapper"],
+  "argv": ["/absolute/path/to/discovered-agent-or-wrapper"],
   "timeout_seconds": 1800
 }
 ```
 
-The runner supplies the campaign prompt on stdin. If your agent instead needs a filename,
-use `{prompt_file}` in an argument. The wrapper should invoke your installed Codex,
-Claude or other agent in its documented noninteractive mode, forward stdin or that file,
-run in the foreground, return the actual exit code, and use its normal permission settings. Check that version's
-help; do not add flags that disable approvals. No CLI, browser tool or authentication is
-installed by this repository. Secrets belong in your existing authentication mechanism,
-not argv or tracked files. Cron's environment may differ from your interactive shell.
-Use absolute executable paths and test under that environment.
+The runner supplies the campaign prompt on stdin. For a filename argument, use
+`{prompt_file}`. No CLI, browser tool or authentication is installed by this repository.
+Cron's environment may differ from the interactive shell; use absolute paths and test
+under that environment. Secrets belong in the existing authentication mechanism.
 
 ```sh
+# Runs the campaign, potentially including authorized outreach; not a setup probe
 python3 scripts/run_campaign.py --config campaigns/my-campaign/runner.json
+
+# Prints the entry the agent installs after setup verification
 python3 scripts/cron_entry.py --config campaigns/my-campaign/runner.json --hour 9
 ```
 
-The second command prints an entry for review, using the machine's cron timezone. It
-does not install it. Install through your scheduler only when requested, preserving
-unrelated entries and checking for existing campaign scheduling. Use one scheduler per
-account. An agent app scheduler is a supported alternative when browser capabilities
-are available only in the desktop session.
+The second command prints an entry using the machine's cron timezone; it does not install
+it. Use one scheduler per account. An app scheduler is a supported alternative when
+browser capabilities are available only in the desktop session.
 
 ## Guarantees and limits
 
