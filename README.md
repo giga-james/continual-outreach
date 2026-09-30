@@ -9,6 +9,11 @@
 
 <p align="center"><strong>Bring your agent. Find your customers. Learn from every batch.</strong></p>
 
+<p align="center">
+  <img src="assets/walkthrough.gif" width="100%" alt="Fictional animated walkthrough: the agent interviews a founder, researches the web to discover leads, verifies a prospect on LinkedIn, prepares a personalized invitation, updates tracking, and learns from responses.">
+</p>
+<p align="center"><sub>Mock walkthrough with fictional data and illustrative interfaces. No real outreach is shown.</sub></p>
+
 A reusable outreach workflow for **any agent that can read files and use the required tools**:
 Codex, Claude Code, or your preferred agent. Fork the repository, start a conversation,
 and let your agent interview you about your ideal customers, outreach channel, messaging
@@ -44,8 +49,10 @@ The agent helps you define:
 | Tracking | Google Sheets, local CSV or another available export connector |
 | Learning | What counts as a useful response, observation window and exploration budget |
 
-It saves a private campaign, researches a sample, shows personalized drafts and checks
-export access. Sending begins only within your authorization; that authorization carries
+Once your ICP and messaging direction are clear, the agent opens its own supported
+computer-use browser session and researches the web to find leads. It follows sources, verifies who
+actually owns the relevant work, saves a private campaign and shows personalized drafts.
+It also checks export access. Sending begins only within your authorization; that authorization carries
 forward within its scope.
 
 **No specific agent runtime is required.** [AGENTS.md](AGENTS.md) is the shared entry
@@ -57,8 +64,9 @@ Markdown, so agents without a skill loader can read the same workflow directly.
 
 ![User flow: fork and open any agent, complete an interview, research and draft, send authorized outreach through connected tools, track outcomes, then audit and tune the next batch. A scheduler wakes the agent; a private ledger gates sends.](assets/architecture.svg)
 
-The agent performs research and interacts with the chosen channel. Local scripts keep
-state and enforce operational gates. A scheduler wakes the agent; it does not send
+Computer use is the default: the current agent navigates the web to research prospects,
+verify their work and interact with the chosen channel. Search tools and export connectors
+complement that browser workflow. Local scripts keep state and enforce operational gates. A scheduler wakes the agent; it does not send
 messages itself. During sending pauses, the agent audits outcomes and prepares the next
 batch.
 
@@ -109,8 +117,10 @@ See [Scheduling](docs/scheduling.md) for the agent setup procedure and manual re
 
 ## Capabilities and limits
 
-- **Bring your tools.** Web research, authenticated computer use and export connectors
-  are supplied by your agent environment. Cloning this repository does not install them.
+- **The agent handles browser startup.** It discovers and starts the computer-use tools
+  in its environment. If access or login is missing, it asks for that specific step and
+  continues any available read-only research. Cloning the repo does not install a browser
+  integration.
 - **Channel support is explicit.** The included send guard supports LinkedIn profile
   identity. Other channels can be researched and drafted, but need a tested identity
   adapter before automated sending.

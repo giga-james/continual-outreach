@@ -16,7 +16,9 @@ Then ask two or three questions at a time to resolve:
    history, tracker location, limits, cohort size, pause window and success definition.
 
 Write `icp.md` with must-have evidence, useful signals, disqualifiers, unknowns, buyer
-path hypotheses and ranked examples. Save configuration plus an evidence-based sample
+path hypotheses and ranked examples. Once criteria and messaging direction are settled,
+start the current agent’s browser session using `browser.md` and proceed to research
+without asking the user to launch it. Save configuration plus an evidence-based sample
 of 5–10 people with real notes. Present the concrete sample and pitch before asking for
 missing sending authorization. Carry existing approval forward without re-asking.
 

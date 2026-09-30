@@ -3,7 +3,11 @@ Read the campaign checkpoint, config, latest audit, ledger and live tracker firs
 If no campaign is selected or onboarding/authorization is incomplete, request only the
 missing information and do not send. Never interpret this scheduler prompt as consent.
 
-Research toward the campaign target using primary evidence and company diversity.
+Start or resume computer use with this agent’s supported browser tools, following the
+skill’s references/browser.md. Verify live session access rather than assuming desktop
+tools survived into this run. Research toward the campaign target using primary evidence
+and company diversity. If browser access is missing, record the gap and use available
+read-only research tools without claiming browser outreach is operational.
 When paused, continue research and outcome audits only. Before any sends reconcile the
 whole account, respect initial holds, daily/rolling caps and cohort observation windows,
 and follow the reservation → UI send → verification → ledger → tracker sequence.

@@ -1,9 +1,15 @@
 # Qualification and personalization
 
+Start or resume the current agent’s computer-use session via `browser.md`. Browser-led
+research is the default; available search tools can accelerate source discovery.
+
 Search primary company posts, project pages, contribution statements, public
 repositories and relevant vendor customer stories. Follow
 vendor → customer → named builder → their work → verified professional identity.
-Do not confuse a customer's logo with a named person's ownership.
+Do not confuse a customer's logo with a named person's ownership. For each promising
+source, open the original work and establish the contribution before finding the person's
+professional profile. Use the profile to resolve identity and contact eligibility; a
+profile match alone does not establish qualification.
 
 Use one JSON object per prospect in `prospects.jsonl`:
 `id, name, company, role, profile_url, work_name, source_urls, checked_at, evidence,

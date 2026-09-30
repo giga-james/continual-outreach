@@ -22,11 +22,11 @@
 <path d="M358 205 H398" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
 <path d="M586 255 V276 H30 V389 H40" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
 <path d="M983 255 V276 H586" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="48" y="305" fill="#94a3b8" font-size="12" font-weight="700" letter-spacing="2">EACH BATCH · AGENT + AUTHENTICATED TOOLS</text>
+<text x="48" y="305" fill="#94a3b8" font-size="12" font-weight="700" letter-spacing="2">EACH BATCH · CURRENT AGENT + COMPUTER USE</text>
 <rect x="48" y="335" width="240" height="108" rx="12" fill="#1e293b" stroke="#334155"/>
 <text x="68" y="367" fill="#f8fafc" font-size="18" font-weight="600">Research + draft</text>
-<text x="68" y="393" fill="#cbd5e1" font-size="12">Verify ownership and fit</text>
-<text x="68" y="416" fill="#cbd5e1" font-size="12">Personalize approved messaging</text>
+<text x="68" y="393" fill="#cbd5e1" font-size="12">Browse sources; verify ownership</text>
+<text x="68" y="416" fill="#cbd5e1" font-size="12">Qualify and personalize drafts</text>
 <rect x="336" y="335" width="240" height="108" rx="12" fill="#1e293b" stroke="#334155"/>
 <text x="356" y="367" fill="#f8fafc" font-size="18" font-weight="600">Check + send</text>
 <text x="356" y="393" fill="#cbd5e1" font-size="12">Ledger gates each attempt</text>

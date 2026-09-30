@@ -15,9 +15,11 @@ Read [learning.md](references/learning.md) before planning a batch or updating a
 
 ## Modes
 
-- **Start:** interview → written ICP and disqualifiers → researched sample and actual
-  personalized drafts → user authorization if sending is requested and not yet granted.
-- **Research:** follow [research.md](references/research.md). Build evidence, not a name count.
+- **Start:** interview → written ICP, disqualifiers and messaging direction → start the
+  current agent’s computer-use session via [browser.md](references/browser.md) → research
+  a sample and personalize drafts → obtain any missing sending authorization.
+- **Research:** use [browser.md](references/browser.md) to start/resume computer use, then
+  follow [research.md](references/research.md). Build evidence, not a name count.
 - **Send/resume:** follow [operations.md](references/operations.md). Check permissions,
   browser identity, account-wide history, local gate and recipient status before sending.
 - **Audit:** follow [audit.md](references/audit.md). Separate acceptance from useful feedback.

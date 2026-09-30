@@ -31,3 +31,8 @@ Scheduling setup is agent-owned: detect the current runtime, generate its config
 probe scheduled capabilities without sending, and install/verify the requested schedule.
 Follow `docs/scheduling.md`. Ask users for cadence or missing access, not routine CLI
 configuration. Reuse existing schedulers and authorization.
+
+After the ICP and messaging direction are settled, automatically start/resume the current
+agent's supported computer-use browser session and begin research. Follow the skill's
+`references/browser.md`; do not ask the user to wire up tools already available to you.
+Keep research access separate from send authorization, and report missing capabilities.
