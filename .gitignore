@@ -1,0 +1,8 @@
+campaigns/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
+*.sqlite*
+.runtime/

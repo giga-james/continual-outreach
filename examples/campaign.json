@@ -1,0 +1,28 @@
+{
+  "name": "New campaign",
+  "timezone": "America/Los_Angeles",
+  "send_authorized": false,
+  "authorization": null,
+  "paused": true,
+  "not_before": null,
+  "reconciled_at": null,
+  "daily_cap": 10,
+  "rolling_7d_cap": 50,
+  "cohort_size": 50,
+  "audit_wait_days": 7,
+  "message_limit": 300,
+  "audit_required_cohorts": [],
+  "research_target": 100,
+  "icp": {},
+  "exclusions": [],
+  "message_template": null,
+  "tracker": null,
+  "automation_id": null,
+  "learning": {
+    "policy": "profile-bandit-v1",
+    "primary_reward": "qualified_reply_within_window",
+    "window_days": 14,
+    "exploration_fraction": 0.2,
+    "segment_definition_version": 1
+  }
+}
