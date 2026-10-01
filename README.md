@@ -20,6 +20,9 @@ It is an **agent distro**: a portable bundle of instructions, skills and scripts
 runs with Codex, Claude Code or your preferred agent. You bring the agent and its browser
 and export tools; the repo supplies the workflow, private campaign state and scheduling.
 
+The agent distro approach is inspired by [Firstmate](https://github.com/kunchenguid/firstmate),
+created by [kunchenguid](https://github.com/kunchenguid).
+
 Start with a hypothetical idea or an existing product. Optionally add GitHub repos,
 documents or interview notes as context. You approve the outreach scope; the agent works
 within it and keeps exploring new profiles alongside those that get useful responses.
