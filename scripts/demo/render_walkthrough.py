@@ -1,139 +1,223 @@
 #!/usr/bin/env python3
-"""Render the fictional README walkthrough. Optional dependency: Pillow.
+"""Draw a fictional Codex-style split-pane demo (no browser or outreach calls).
 
-Run from any directory: python3 scripts/demo/render_walkthrough.py
-Set DEMO_FONT and DEMO_BOLD to override the default macOS/DejaVu fonts.
-This draws mock interfaces only; it never opens a browser or contacts anyone.
+Run: python3 scripts/demo/render_walkthrough.py. Requires Pillow.
+DEMO_FONT / DEMO_BOLD optionally override the macOS/DejaVu fonts.
+Encode the pause-capable video from the repository root:
+  ffmpeg -y -i assets/walkthrough.gif -movflags +faststart -pix_fmt yuv420p \
+    -vf "fps=20" assets/walkthrough.mp4
 """
+import json
 import os
 import tempfile
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
-W, H = 1100, 700
-BG = '#0f172a'
+W, H = 1440, 900
 FONT = os.environ.get('DEMO_FONT', '/System/Library/Fonts/Supplemental/Arial.ttf')
 BOLD = os.environ.get('DEMO_BOLD', '/System/Library/Fonts/Supplemental/Arial Bold.ttf')
 if not Path(FONT).exists(): FONT = 'DejaVuSans.ttf'
 if not Path(BOLD).exists(): BOLD = 'DejaVuSans-Bold.ttf'
+INK, MUTED, GREEN = '#242724', '#717671', '#2f7052'
+SCENES = [
+    '01  Tell the agent who you want to learn from',
+    '02  Lock the ICP, message and sending scope',
+    '03  Research the web for hands-on evidence',
+    '04  Read the source and qualify the person',
+    '05  Verify the person on LinkedIn',
+    '06  Personalize the approved invitation',
+    '07  Verify the send and update the tracker',
+    '08  Learn from replies before the next batch',
+]
 
-def font(size=16, bold=False): return ImageFont.truetype(BOLD if bold else FONT, size)
+def font(size=18, bold=False):
+    return ImageFont.truetype(BOLD if bold else FONT, size)
 
 def render(step, cursor=None, click=False):
-    im = Image.new('RGB', (W, H), BG)
+    im = Image.new('RGB', (W, H), '#ffffff')
     d = ImageDraw.Draw(im)
-    def text(x,y,t,size=16,color='#cbd5e1',bold=False):
+    def text(x,y,t,size=18,color=INK,bold=False):
         d.text((x,y),t,font=font(size,bold),fill=color)
-    def box(x,y,w,h,fill='#1e293b',outline=None,r=12):
+    def box(x,y,w,h,fill='#f5f6f4',outline=None,r=12):
         d.rounded_rectangle((x,y,x+w,y+h),radius=r,fill=fill,outline=outline)
-    def lines(x,y,items,size=16,color='#cbd5e1',gap=25):
-        for i,t in enumerate(items): text(x,y+i*gap,t,size,color)
-    def button(x,y,w,label,fill='#0a66c2'):
-        w = max(w, int(d.textlength(label, font=font(14, True))) + 32)
-        box(x,y,w,36,fill,r=18); text(x+16,y+9,label,14,'#ffffff',True)
-    def bubble(y,label,items,user=False):
-        box(38,y,314,42+len(items)*24,'#30305a' if user else '#1e293b')
-        text(52,y+12,label,12,'#c4b5fd' if user else '#93c5fd',True)
-        lines(52,y+36,items,14,gap=24)
-    names=['Interview the founder','Set qualification + messaging','Research the web','Read the evidence','Verify the LinkedIn profile','Prepare the approved note','Verify + export the result','Learn before the next batch']
-    text(28,23,'CONTINUAL OUTREACH',15,'#a5b4fc',True)
-    text(28,52,names[step],27,'#f8fafc',True)
-    box(845,22,225,28,'#302c46',r=14); text(860,29,'MOCK DEMO · FICTIONAL DATA',11,'#e9d5ff',True)
-    text(28,97,'Your agent',14,'#94a3b8',True)
-    box(378,99,695,537,'#ffffff')
-    box(378,99,695,45,'#e2e8f0')
-    for i,c in enumerate(['#f87171','#fbbf24','#4ade80']): d.ellipse((392+i*17,115,401+i*17,124),fill=c)
-    url=['Campaign workspace','Campaign workspace','Web research · illustrative browser','harborlight.example/blog/knowledge-base · fictional','linkedin.com/in/maya-chen-demo · mock','LinkedIn · mock connection dialog','Campaign tracker · mock export','Campaign audit · illustrative outcomes'][step]
-    text(459,114,url,13,'#475569')
+    def lines(x,y,items,size=19,color=INK,gap=29,bold=False):
+        for i,t in enumerate(items): text(x,y+i*gap,t,size,color,bold)
+    def button(x,y,w,label,fill=GREEN):
+        box(x,y,w,40,fill,r=20); text(x+18,y+10,label,16,'#ffffff',True)
+    def chat(y,label,items,user=False):
+        x=191 if user else 176
+        if user: box(x-12,y-10,444,len(items)*28+48,'#f0f1ee',r=16)
+        text(x,y,label,14,MUTED,True)
+        lines(x,y+29,items,19,gap=28)
+    def browsertitle(title,subtitle):
+        text(714,185,title,27,INK,True)
+        text(714,229,subtitle,16,MUTED)
+    def card(y,title,details):
+        box(714,y,650,58+len(details)*29,'#f7f8f6','#e4e7e1')
+        text(734,y+17,title,16,GREEN,True)
+        lines(734,y+49,details,20)
+
+    # Native-style window chrome, restrained sidebar, task and embedded browser.
+    d.rectangle((0,0,W,52),fill='#f7f7f5')
+    for i,c in enumerate(['#ee7369','#e7bb56','#72be81']):
+        d.ellipse((20+i*21,21,31+i*21,32),fill=c)
+    text(113,18,'Codex',16,INK,True)
+    text(530,18,'continual-outreach',15,MUTED)
+    box(1172,13,248,28,'#e9eee8',r=14)
+    text(1186,20,'ILLUSTRATIVE / FICTIONAL DATA',11,GREEN,True)
+    d.rectangle((0,52,150,H),fill='#f4f5f2')
+    text(18,82,'+  New task',16,INK,True)
+    text(18,142,'PROJECTS',11,MUTED,True)
+    box(10,170,130,56,'#e5e8e1',r=8)
+    lines(19,181,['continual-', 'outreach'],14,INK,20,True)
+    text(18,263,'TASKS',11,MUTED,True)
+    lines(18,299,['Find support','ops leads'],14,INK,22)
+    text(18,811,'Local workspace',11,MUTED)
+    text(18,836,'Mock campaign',11,MUTED)
+    d.line((666,52,666,844),fill='#dfe2dc',width=1)
+    text(176,77,'Find support ops leads',22,INK,True)
+    text(176,111,'Interview → evidence → outreach → learn',14,MUTED)
+    d.line((151,144,666,144),fill='#e9ebe6')
+    text(700,75,'Browser',16,INK,True)
+    text(1290,75,'Split view',13,MUTED)
+    box(696,108,720,42,'#f2f3f0',r=8)
+    url=[
+        'Campaign brief · mock workspace', 'Approved campaign · mock workspace',
+        'Search · illustrative results', 'harborlight.example / blog / weekly-ticket-review',
+        'LinkedIn · fictional profile', 'LinkedIn · fictional invitation',
+        'Google Sheets · fictional tracker', 'Campaign audit · fictional outcomes'
+    ][step]
+    text(711,121,'‹   ›    '+url,15,MUTED)
+    box(175,752,467,67,'#fafbf9','#e1e4dd',r=18)
+    text(193,770,'Ask a follow-up…',17,'#9a9e97')
+    text(193,797,'Local agent  ·  computer use',11,MUTED)
+    d.ellipse((601,771,626,796),fill=INK); text(608,772,'↑',18,'#ffffff')
     if step==0:
-        bubble(130,'AGENT',['What are you building, and','whose work should improve?'])
-        bubble(246,'YOU',['A tool that helps support teams','turn recurring issues into','clear internal documentation.'],True)
-        bubble(386,'AGENT',['Who owns that work today?'])
-        bubble(478,'YOU',['Support ops leads who maintain','the knowledge base themselves.'],True)
-        text(415,176,'Campaign interview',24,'#0f172a',True)
-        for y,title,detail in [(241,'Product','Support documentation assistant'),(328,'Champion','Hands-on support operations lead'),(415,'Evidence','Owns the process, not just the title')]:
-            box(413,y,622,70,'#f1f5f9'); text(431,y+12,title,14,'#64748b',True); text(431,y+37,detail,18,'#0f172a')
+        chat(178,'YOU',['I’m building a support knowledge-base','tool. Find people I can learn from.'],True)
+        chat(305,'AGENT',['Who does the work today? What would','make someone a strong interview?'])
+        chat(426,'YOU',['Support ops leads at B2B SaaS firms','who personally review recurring tickets','and update help docs every week.'],True)
+        chat(581,'AGENT',['What should I exclude, and what is','the goal of the outreach?'])
+        browsertitle('Start with the customer’s goal','Alex · founder of a support knowledge-base tool')
+        card(280,'FIND THE PERSON DOING THE WORK',['Support operations leads at B2B SaaS firms'])
+        card(414,'LOOK FOR REPEATED MANUAL WORK',['Review recurring support tickets','Update help articles every week'])
+        card(575,'SUCCESS = A USEFUL CONVERSATION',['Learn how they maintain support knowledge','and where the process takes time'])
     elif step==1:
-        bubble(130,'AGENT',['I’ll look for people who describe','maintaining a knowledge base.','Exclude vendors selling this.'])
-        bubble(270,'YOU',['Yes. Use that profile and note.','Send within our agreed limits.'],True)
-        bubble(387,'AGENT',['Saved. I’ll open my browser','and verify each person’s work.'])
-        text(415,176,'Ready to research',24,'#0f172a',True)
-        lines(421,239,['ICP and exclusions saved','Message and call to action agreed','Sending scope and limits recorded','Tracker destination checked'],18,'#334155',48)
-        button(418,464,205,'Start browser research')
+        chat(178,'YOU',['Exclude vendors and generic leaders.','Ask for a 15-minute learning chat.','Track everything in Google Sheets.'],True)
+        chat(332,'AGENT',['I’ll verify hands-on work, personalize','each note, and skip existing or','pending connections. Ready to send?'])
+        chat(482,'YOU',['Yes—use the agreed note and limits.'],True)
+        chat(586,'AGENT',['Scope saved. Starting browser research.'])
+        browsertitle('A clear brief before the browser opens','ICP + message + destination + sending scope')
+        card(277,'IDEAL INTERVIEW',['B2B SaaS · hands-on support ops owner','Public evidence of a weekly review routine'])
+        card(437,'EXCLUDE',['Vendors selling similar tools','Leadership titles without ownership evidence'])
+        card(597,'OUTREACH PLAN',['15-minute learning chat · approved note','Google Sheets tracking · agreed send budget'])
     elif step==2:
-        bubble(130,'AGENT',['Computer use is ready.','Searching for public evidence','of knowledge-base ownership.'])
-        bubble(270,'AGENT',['Found a company article.','I’ll read it before qualifying','the author.'])
-        text(415,177,'Find hands-on practitioners',24,'#0f172a',True)
-        box(414,228,622,45,'#f1f5f9'); text(431,243,'support operations knowledge base workflow',17,'#334155')
-        text(419,316,'How we rebuilt our support knowledge base',21,'#0a66c2',True)
-        lines(419,355,['Harborlight Labs · Company blog · Fictional example','By Maya Chen, Support Operations Lead','A practical account of maintaining articles and reviewing','recurring support issues with the frontline team.'],16,'#475569',29)
-        button(419,511,163,'Read source article')
+        chat(178,'AGENT',['Searching for people describing their','actual ticket and documentation work.'])
+        chat(312,'AGENT',['A title is not enough. I’m looking for','a named owner and a repeatable routine.'])
+        chat(458,'AGENT',['This company article looks promising.','Opening the original source.'])
+        browsertitle('Research the work, not just the title','Illustrative search results')
+        box(714,280,650,57,'#ffffff','#cfd5cb',r=25)
+        text(734,299,'"support operations" "weekly" "knowledge base"',19)
+        text(720,379,'Harborlight Labs  /  Company blog',15,MUTED)
+        lines(720,414,['How we review support tickets','and keep our help center current'],25,'#2463a5',33,True)
+        lines(720,503,['By Maya Chen · Support Operations Lead','Our weekly routine for turning recurring questions','into better documentation.'],19,MUTED,30)
+        button(720,626,185,'Read source article')
     elif step==3:
-        bubble(130,'AGENT',['Reading the original article,','not just the search snippet.','Who actually owns the work?'])
-        bubble(270,'AGENT',['Maya explains her weekly','review routine. Strong signal:','she runs the process herself.'])
-        text(418,174,'HARBORLIGHT LABS / FIELD NOTES',13,'#64748b',True)
-        lines(418,212,['How we rebuilt our','support knowledge base'],28,'#0f172a',36)
-        text(418,300,'Maya Chen · Support Operations Lead',16,'#0a66c2',True)
-        box(414,349,622,116,'#eef2ff')
-        lines(431,367,['“Every Friday, I review recurring support tickets,','update the articles, and ask the team to flag','anything that still needs a clearer answer.”'],18,'#3730a3',29)
-        text(418,480,'Evidence saved: named owner + repeated manual work',15,'#475569')
-        button(419,535,179,'View author on LinkedIn')
+        chat(178,'AGENT',['Maya names the exact work she does:','weekly ticket reviews and article edits.'])
+        chat(313,'AGENT',['Harborlight builds B2B software.','She meets the company and role criteria.'])
+        chat(456,'AGENT',['Saved the source and evidence.','Next: verify her LinkedIn identity.'])
+        browsertitle('Harborlight Labs / Field notes','Fictional company article')
+        lines(714,284,['How we review support tickets','and keep our help center current'],27,INK,36,True)
+        text(714,380,'Maya Chen · Support Operations Lead',18,'#2463a5',True)
+        box(714,432,650,158,'#eaf2e9',r=12)
+        lines(737,456,['“Every Friday, I review recurring support tickets,','update the help articles, and ask our frontline','team what still needs a clearer answer.”'],21,'#305b3c',34)
+        text(718,614,'MATCH: named owner + weekly manual work',16,GREEN,True)
+        button(716,683,216,'Find LinkedIn profile')
     elif step in (4,5):
-        bubble(130,'AGENT',['Maya describes owning the','weekly article review process.','Evidence matches the ICP.'])
-        bubble(270,'AGENT',['Profile verified. No existing','connection or pending request.','Checking the approved note.'])
-        box(398,158,655,102,'#dae6ef'); d.ellipse((423,212,505,294),fill='#a5b4fc'); text(443,237,'MC',25,'#312e81',True)
-        text(420,313,'Maya Chen',26,'#0f172a',True)
-        lines(420,355,['Support Operations Lead at Harborlight Labs','Owns support knowledge and article review workflows'],16,'#475569',27)
-        button(420,426,118,'Connect')
-        text(420,489,'Featured work',18,'#0f172a',True)
-        text(420,522,'How we rebuilt our support knowledge base',18,'#0a66c2')
+        chat(178,'AGENT',['Verified: same name, company and role','as the author of the source article.'])
+        chat(312,'AGENT',['No existing connection or pending','invitation. This prospect is eligible.'])
+        chat(457,'AGENT',(['Personalizing the approved note around','her weekly ticket-review process.'] if step==5 else ['The note will reference her article,','not a generic compliment.']))
+        box(694,170,721,128,'#d9e4dd',r=8)
+        d.ellipse((719,253,809,343),fill='#a9bcab',outline='#ffffff',width=4)
+        text(738,282,'MC',29,'#35533b',True)
+        text(716,367,'Maya Chen',30,INK,True)
+        lines(716,417,['Support Operations Lead at Harborlight Labs','B2B SaaS · Support knowledge and enablement'],19,MUTED,31)
+        button(716,502,132,'Connect',fill='#0a66c2')
+        text(716,589,'Featured work',20,INK,True)
+        lines(716,628,['How we review support tickets','and keep our help center current'],22,'#2463a5',31)
         if step==5:
-            box(407,222,636,349,'#ffffff','#cbd5e1')
-            text(434,248,'Add a note to your invitation',23,'#0f172a',True)
-            box(433,297,582,191,'#f8fafc','#cbd5e1')
-            lines(449,313,['Hi Maya, I came across your article on rebuilding','Harborlight’s support knowledge base. I’m Alex,','building tools for support teams. Open to a 15-minute','chat about your process? Not selling anything—','just hoping to learn about your day to day.'],17,'#334155',30)
-            button(912,510,102,'Send')
+            box(698,226,711,488,'#ffffff','#cbd3c8',r=15)
+            text(724,251,'Add a note to your invitation',25,INK,True)
+            box(721,312,664,274,'#fafbf9','#d6ddd0')
+            lines(741,336,['Hi Maya, I read your article on weekly ticket','reviews and help-doc updates. I’m Alex, building','a support knowledge-base tool. Open to a','15-minute chat about how you developed that','process? Not selling anything—just looking','to learn about your day to day.'],21,INK,36)
+            text(725,615,'Personalized from verified source evidence',16,MUTED)
+            button(1268,652,112,'Send',fill='#0a66c2')
     elif step==6:
-        bubble(130,'AGENT',['Invitation verified as pending.','Recorded the exact note and','confirmed the tracker update.'])
-        bubble(270,'AGENT',['One verified send.','Next: observe responses before','adjusting candidate selection.'])
-        text(415,177,'Outreach tracker',24,'#0f172a',True)
-        box(415,234,620,47,'#dcfce7'); text(432,250,'Sent state verified · export synchronized',17,'#166534')
-        for x,t in [(424,'Prospect'),(647,'Qualification'),(873,'Status')]: text(x,319,t,15,'#64748b',True)
-        d.line((417,350,1033,350),fill='#e2e8f0',width=2)
-        text(424,372,'Maya Chen',17,'#0f172a',True); text(647,372,'Verified owner',16,'#334155'); text(873,372,'Pending',16,'#0a66c2')
-        lines(425,449,['Source and message saved with a stable prospect ID.','Existing connections and pending requests are skipped.'],16,'#475569',30)
+        chat(178,'AGENT',['The invitation now shows Pending.','Saved the exact note and source URL.'])
+        chat(312,'AGENT',['Google Sheets row updated and verified.','One send recorded against the budget.'])
+        chat(457,'AGENT',['I’ll observe replies before changing','the next batch of prospects.'])
+        browsertitle('Outreach tracker','Google Sheets · illustrative campaign export')
+        box(714,276,650,47,'#eaf2e9')
+        text(733,291,'Verified send · tracker synchronized',18,GREEN,True)
+        for x,label in [(727,'Person'),(920,'Evidence'),(1217,'Status')]: text(x,369,label,16,MUTED,True)
+        d.line((714,406,1364,406),fill='#dce2d7')
+        text(727,431,'Maya Chen',20,INK,True)
+        lines(920,429,['Weekly ticket review','+ help-doc updates'],18,INK,29)
+        box(1202,423,140,39,'#e9f0f8',r=19); text(1226,434,'Pending',17,'#2463a5')
+        card(557,'SAVED FOR THE NEXT AUDIT',['Evidence source · personalized note · sent time','Stable prospect ID · reply and interview outcomes'])
     else:
-        bubble(130,'AGENT',['After the observation window,','compare useful replies across','equally aged profile groups.'])
-        bubble(270,'AGENT',['Favor stronger-fit profiles,','keep an exploration share,','and prepare the next batch.'])
-        text(415,177,'Later: audit and tune',24,'#0f172a',True)
-        text(420,224,'Illustrative mature cohort · not real campaign results',14,'#64748b')
-        for y,label,v in [(281,'Hands-on process owners',.65),(352,'Broad leadership titles',.25)]:
-            text(420,y,label,17,'#334155',True); box(420,y+29,480,14,'#e2e8f0',r=7); box(420,y+29,int(480*v),14,'#818cf8',r=7)
-        text(420,429,'Useful replies per observed cohort',14,'#64748b')
-        box(415,478,620,99,'#eef2ff'); lines(434,496,['Next batch: evidence-guided selection + exploration','Respect sending holds and the agreed cadence.'],17,'#3730a3',32)
-    for i in range(8): box(28+i*131,661,121,5,'#818cf8' if i<=step else '#334155',r=2)
-    text(29,677,'Illustrative UI only. All people, companies and outcomes are fictional. No live outreach.',11,'#94a3b8')
+        chat(178,'AGENT',['Later, after the observation window:','compare useful replies from equally','aged groups—not just acceptances.'])
+        chat(339,'AGENT',['Hands-on owners replied more often.','The next batch favors these profiles.'])
+        chat(480,'AGENT',['Keep 20% exploration to test adjacent','roles. Resume only within the budget','and after any sending hold expires.'])
+        browsertitle('Learn, then select the next batch','Fictional results · equal observation windows')
+        for y,label,count,width in [(290,'Weekly review + help-doc owners','4 / 10 useful replies',470),(426,'Help-doc owners; no weekly evidence','1 / 10 useful replies',118)]:
+            text(718,y,label,21,INK,True)
+            box(718,y+41,590,16,'#e8ece4',r=8)
+            box(718,y+41,width,16,'#7eaa83',r=8)
+            text(718,y+72,count,17,MUTED)
+        card(593,'NEXT BATCH',['80% evidence-guided selection','20% exploration of adjacent profiles'])
+    # Permanent chapter strip makes the narrative understandable mid-playback.
+    d.rectangle((150,842,W,H),fill='#f6f7f4')
+    text(177,858,SCENES[step],20,INK,True)
+    text(1131,868,'Mock UI, people and results',13,MUTED)
+    for i in range(8):
+        d.rectangle((176+i*156,836,321+i*156,840),fill=GREEN if i<=step else '#e4e8e0')
     if cursor:
         x,y=cursor
-        if click: d.ellipse((x-17,y-17,x+17,y+17),outline='#a78bfa',width=3)
-        d.polygon([(x,y),(x+3,y+25),(x+10,y+18),(x+17,y+30),(x+22,y+27),(x+15,y+15),(x+25,y+13)],fill='#0f172a',outline='#ffffff')
+        if click: d.ellipse((x-19,y-19,x+19,y+19),outline='#61956d',width=3)
+        d.polygon([(x,y),(x+3,y+25),(x+10,y+18),(x+17,y+30),(x+22,y+27),(x+15,y+15),(x+25,y+13)],fill=INK,outline='#ffffff')
     return im
 
-frames=[]; durations=[]
-for step in range(8):
-    target={1:(535,482),2:(500,528),3:(500,552),4:(478,443),5:(965,528)}.get(step)
-    frames.append(render(step)); durations.append(4800 if step in (0,3,5,7) else 3600)
-    if target:
-        for i in range(1,9):
-            ratio=i/8
-            frames.append(render(step,(int(1035+(target[0]-1035)*ratio),int(607+(target[1]-607)*ratio))))
-            durations.append(65)
-        frames.append(render(step,target,True)); durations.append(550)
-frames[0].save(ROOT/'assets/walkthrough.gif',save_all=True,append_images=frames[1:],duration=durations,loop=0,optimize=True)
-# Contact sheet makes all narrative states easy to review without playing the GIF.
-contact=Image.new('RGB',(1100,4*350),'#0f172a')
-for i in range(8): contact.paste(render(i).resize((550,350)),((i%2)*550,(i//2)*350))
-contact.save(Path(tempfile.gettempdir())/'continual-outreach-demo-review.png')
-print(ROOT/'assets/walkthrough.gif')
-print(f'{len(frames)} frames; {sum(durations)/1000:.1f}s; {(ROOT/"assets/walkthrough.gif").stat().st_size:,} bytes')
+
+def main():
+    frames, durations, chapters = [], [], []
+    for step,title in enumerate(SCENES):
+        start = sum(durations)
+        target={2:(814,646),3:(819,701),4:(780,522),5:(1320,670)}.get(step)
+        frames.append(render(step)); durations.append(6500 if step in (0,1,5,7) else 5000)
+        if target:
+            for i in range(1,9):
+                ratio=i/8
+                frames.append(render(step,(int(1375+(target[0]-1375)*ratio),int(788+(target[1]-788)*ratio))))
+                durations.append(70)
+            frames.append(render(step,target,True)); durations.append(550)
+        chapters.append({'title':title,'start_seconds':start/1000,'duration_seconds':(sum(durations)-start)/1000})
+    assets=ROOT/'assets'
+    frames[0].save(assets/'walkthrough.gif',save_all=True,append_images=frames[1:],duration=durations,loop=0,optimize=True)
+    poster=render(0)
+    pd=ImageDraw.Draw(poster)
+    pd.rounded_rectangle((1016,744,1364,804),radius=30,fill=GREEN)
+    pd.polygon([(1039,760),(1039,787),(1059,774)],fill='#ffffff')
+    pd.text((1072,762),'Watch walkthrough · 50 sec',font=font(19,True),fill='#ffffff')
+    poster.save(assets/'walkthrough-poster.png')
+    (assets/'walkthrough-scenes.json').write_text(json.dumps(chapters,indent=2)+'\n')
+    contact=Image.new('RGB',(1440,4*450),'#ffffff')
+    for i in range(8): contact.paste(render(i).resize((720,450)),((i%2)*720,(i//2)*450))
+    path=Path(tempfile.gettempdir())/'continual-outreach-demo-review.png'
+    contact.save(path)
+    print(assets/'walkthrough.gif')
+    print(path)
+    print(f'{len(frames)} frames; {sum(durations)/1000:.2f}s; {(assets/"walkthrough.gif").stat().st_size:,} bytes')
+
+if __name__ == '__main__':
+    main()

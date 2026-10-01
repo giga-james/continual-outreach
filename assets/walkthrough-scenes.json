@@ -1,0 +1,42 @@
+[
+  {
+    "title": "01  Tell the agent who you want to learn from",
+    "start_seconds": 0.0,
+    "duration_seconds": 6.5
+  },
+  {
+    "title": "02  Lock the ICP, message and sending scope",
+    "start_seconds": 6.5,
+    "duration_seconds": 6.5
+  },
+  {
+    "title": "03  Research the web for hands-on evidence",
+    "start_seconds": 13.0,
+    "duration_seconds": 6.11
+  },
+  {
+    "title": "04  Read the source and qualify the person",
+    "start_seconds": 19.11,
+    "duration_seconds": 6.11
+  },
+  {
+    "title": "05  Verify the person on LinkedIn",
+    "start_seconds": 25.22,
+    "duration_seconds": 6.11
+  },
+  {
+    "title": "06  Personalize the approved invitation",
+    "start_seconds": 31.33,
+    "duration_seconds": 7.61
+  },
+  {
+    "title": "07  Verify the send and update the tracker",
+    "start_seconds": 38.94,
+    "duration_seconds": 5.0
+  },
+  {
+    "title": "08  Learn from replies before the next batch",
+    "start_seconds": 43.94,
+    "duration_seconds": 6.5
+  }
+]

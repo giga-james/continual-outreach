@@ -10,9 +10,26 @@
 <p align="center"><strong>Bring your agent. Find your customers. Learn from every batch.</strong></p>
 
 <p align="center">
-  <img src="assets/walkthrough.gif" width="100%" alt="Fictional animated walkthrough: the agent interviews a founder, researches the web to discover leads, verifies a prospect on LinkedIn, prepares a personalized invitation, updates tracking, and learns from responses.">
+  <a href="assets/walkthrough.mp4"><img src="assets/walkthrough-poster.png" width="100%" alt="Play the mock walkthrough: a Codex-inspired chat and side browser research support operations leads who personally maintain help articles."></a>
 </p>
-<p align="center"><sub>Mock walkthrough with fictional data and illustrative interfaces. No real outreach is shown.</sub></p>
+<p align="center"><strong><a href="assets/walkthrough.mp4">Watch the walkthrough — play, pause and scrub</a></strong><br>
+<sub>Mock Codex-style workspace. Fictional people and data; no real outreach.</sub></p>
+
+**The example:** a founder building a support documentation tool wants 15-minute
+interviews with support operations leads at B2B SaaS companies who personally review
+recurring tickets and update help articles every week. The agent turns that brief into
+qualification criteria, finds source evidence, verifies a LinkedIn profile and prepares
+an approved, specific invitation.
+
+<details>
+<summary>View the animated GIF instead</summary>
+
+![Fictional interview, browser research, qualification, LinkedIn outreach and tracking walkthrough](assets/walkthrough.gif)
+
+GIF playback has no pause controls. Use the video above for playback controls, or open
+[the local video player](docs/demo.html) in your browser after cloning the repository.
+
+</details>
 
 A reusable outreach workflow for **any agent that can read files and use the required tools**:
 Codex, Claude Code, or your preferred agent. Fork the repository, start a conversation,
