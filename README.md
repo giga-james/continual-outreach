@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/continual-outreach-hero.png" width="100%" alt="Continual Outreach: your idea and optional context become researched, qualified prospects and personalized outreach; replies improve the next batch.">
+  <img src="assets/continual-outreach-hero-v2.png" width="100%" alt="Continual Outreach: your idea and optional context become researched, qualified prospects and personalized outreach; replies improve the next batch.">
 </p>
 
 <p align="center">
