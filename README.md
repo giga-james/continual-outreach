@@ -1,4 +1,6 @@
-<h1 align="center">Continual Outreach</h1>
+<p align="center">
+  <img src="assets/continual-outreach-hero.png" width="100%" alt="Continual Outreach: your idea and optional context become researched, qualified prospects and personalized outreach; replies improve the next batch.">
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Agent-Independent-6366f1" alt="Agent independent">
@@ -7,7 +9,6 @@
   <a href="https://x.com/kunggaochicken"><img src="https://img.shields.io/badge/Follow-%40kunggaochicken-000000?logo=x&logoColor=white" alt="Follow @kunggaochicken on X"></a>
 </p>
 
-<p align="center"><strong>Bring your agent. Find your customers. Learn from every batch.</strong></p>
 
 <p align="center">
   <a href="assets/walkthrough.mp4"><img src="assets/walkthrough.gif" width="100%" alt="Animated mock walkthrough: a Codex-inspired chat and side browser research support operations leads who personally maintain help articles."></a>

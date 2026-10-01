@@ -1,0 +1,17 @@
+Generated with the built-in image generation tool.
+
+Use case: infographic-diagram.
+Asset type: a premium illustrated hero banner at the top of the GitHub README for "Continual Outreach".
+Create a wide landscape editorial technology graphic, roughly 2.4:1, crisp and beautifully art-directed. It must explain the product in five seconds, not look like a corporate slide or a screenshot. A specialized agent works with a founder to discover good-fit people, personalize outreach, and learn from replies. Sources are optional, not automatically the current codebase.
+Visual style: sophisticated tactile 3D paper-and-machined-object illustration on warm ivory, restrained charcoal typography and deep forest green accents consistent with a clean light developer-tool interface. Precise soft shadows, generous whitespace, elegant lines. Rich visual craft but very little text. Large readable typography; no tiny paragraphs, fake UI gibberish, extra logos or watermarks.
+Composition: an understated title area above a clear left-to-right workflow of five sculptural mini-scenes linked by thin directional arrows. Scene 1: a conversation bubble and idea card, with small optional source cards suggesting a repo, a document and notes. Scene 2: a magnifying glass inspecting a browser page and a short list of profile cards. Scene 3: two matched profile cards with a quiet verification mark. Scene 4: a personalized message card and paper-plane symbol. Scene 5: incoming reply bubbles with a small analysis mark. A single graceful return arrow from the replies back toward research shows the learning loop. Make the loop a visual focal point, not a decorative infinite spiral.
+Exact text only:
+Title: "Continual Outreach"
+Subtitle: "Bring your agent. Find your customers. Learn from every batch."
+Five scene labels, in order: "Your idea" / "Research" / "Qualify" / "Reach out" / "Learn"
+Small label beside the source cards: "Optional context"
+Label on the return arrow: "Better-fit people next time"
+No additional text. The result should feel like a distinctive open-source developer project hero, refined and visually delightful. Ensure the label order and arrow direction are logically correct. All typography must be legible at README width.
+
+
+Final edit: preserve composition, wording and illustrations; use a fully opaque warm ivory (#F5F2E9) rectangular canvas behind every element so text remains readable on both light and dark README pages. No transparency or speckled edges.
