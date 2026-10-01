@@ -176,6 +176,20 @@ Standalone campaigns can use ignored `campaigns/` in the distro. Keep a private 
 these records are not included in your fork.
 The repository contains only a [generic, draft-mode example](examples/campaign.json).
 
+Each campaign has its own `campaign.json` with four core settings:
+
+| Setting | Field | Purpose |
+| --- | --- | --- |
+| ICP profile | `icp` | Qualification criteria and target profiles; `icp.md` holds supporting rationale |
+| Outreach message | `message_template` | The approved template personalized for each prospect |
+| Tracker | `tracker` | The campaign's sheet/tab, local file or other export destination |
+| Outreach channel | `channel` | For example, `linkedin`; selected during onboarding |
+
+The agent saves these during the interview. Separate campaigns keep separate settings,
+prospect records, sent messages and outcomes. When campaigns share a sender account,
+account-wide limits and duplicate checks still need reconciliation across campaigns.
+
+
 Exports use stable IDs and are verified after each send or skip. If synchronization
 fails, sending pauses until the tracker is repaired. See [Exports](docs/exports.md).
 

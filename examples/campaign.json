@@ -16,6 +16,7 @@
   "icp": {},
   "exclusions": [],
   "message_template": null,
+  "channel": null,
   "tracker": null,
   "automation_id": null,
   "learning": {

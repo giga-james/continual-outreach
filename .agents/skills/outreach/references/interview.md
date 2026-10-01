@@ -30,6 +30,14 @@ without asking the user to launch it. Save configuration plus an evidence-based 
 of 5–10 people with real notes. Present the concrete sample and pitch before asking for
 missing sending authorization. Carry existing approval forward without re-asking.
 
+Persist the campaign's four core settings in its own `campaign.json`: `icp` for the
+current qualification criteria, `message_template` for the approved outreach template,
+`tracker` for its export destination (including exact sheet/tab or file path), and
+`channel` for the chosen outreach method (for example, `linkedin`). Keep `icp.md` as
+supporting rationale and examples, aligned with the current configuration. Record the
+sender account and approved scope in `authorization`. Do not copy these settings from
+another campaign implicitly; an unset channel requires clarification before sending.
+
 Initialize a new local campaign with draft-only defaults. If a sheet is wanted, use
 available Google Sheets skills/connectors and honor the specified folder. Missing
 connector access does not block local research; do not promise sheet sync until tested.
