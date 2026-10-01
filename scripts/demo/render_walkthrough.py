@@ -94,12 +94,12 @@ def render(step, cursor=None, click=False):
     text(193,797,'Local agent  ·  computer use',11,MUTED)
     d.ellipse((601,771,626,796),fill=INK); text(608,772,'↑',18,'#ffffff')
     if step==0:
-        chat(178,'YOU',['I’m building a support knowledge-base','tool. Find people I can learn from.'],True)
-        chat(305,'AGENT',['Who does the work today? What would','make someone a strong interview?'])
-        chat(426,'YOU',['Support ops leads at B2B SaaS firms','who personally review recurring tickets','and update help docs every week.'],True)
-        chat(581,'AGENT',['What should I exclude, and what is','the goal of the outreach?'])
+        chat(178,'YOU',['Find 30 support ops leads for my','help-docs tool. Research their work,','draft personal LinkedIn notes asking','for a 15-minute chat, and track replies','so the next batch gets better.'],True)
+        chat(380,'AGENT',['What shows they feel this pain—and','which companies should I focus on?'])
+        chat(490,'YOU',['Support ops leads at B2B SaaS firms','who personally review recurring tickets','and update help docs every week.'],True)
+        chat(643,'AGENT',['Got it. What should I exclude, and','where should I track the results?'])
         browsertitle('Start with the customer’s goal','Alex · founder of a support knowledge-base tool')
-        card(280,'FIND THE PERSON DOING THE WORK',['Support operations leads at B2B SaaS firms'])
+        card(280,'FIND 30 QUALIFIED PEOPLE',['Support operations leads at B2B SaaS firms'])
         card(414,'LOOK FOR REPEATED MANUAL WORK',['Review recurring support tickets','Update help articles every week'])
         card(575,'SUCCESS = A USEFUL CONVERSATION',['Learn how they maintain support knowledge','and where the process takes time'])
     elif step==1:
