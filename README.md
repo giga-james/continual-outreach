@@ -1,4 +1,7 @@
 <p align="center">
+  <img src="https://img.shields.io/badge/Agent-Independent-6366f1" alt="Agent independent">
+  <img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white" alt="Python 3.9+">
+  <img src="https://img.shields.io/badge/Status-Experimental-f4a7c3" alt="Experimental">
   <a href="https://x.com/kunggaochicken"><img src="https://img.shields.io/badge/Follow-%40kunggaochicken-000000?logo=x&logoColor=white" alt="Follow @kunggaochicken on X"></a>
 </p>
 
@@ -6,11 +9,6 @@
   <img src="assets/continual-outreach-hero-v3.png" width="100%" alt="Continual Outreach: your idea and optional context become researched, qualified prospects and personalized outreach; replies improve the next batch.">
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Agent-Independent-6366f1" alt="Agent independent">
-  <img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white" alt="Python 3.9+">
-  <img src="https://img.shields.io/badge/Status-Experimental-f4a7c3" alt="Experimental">
-</p>
 
 ## What it is
 
@@ -20,7 +18,7 @@ customer profile, researches people on the internet, personalizes outreach, trac
 responses, and uses what it learns to improve the next batch.
 
 It bundles portable instructions, skills and scripts that
-runs with Codex, Claude Code or your preferred agent. You bring the agent and its browser
+run with Codex, Claude Code or your preferred agent. You bring the agent and its browser
 and export tools; the repo supplies the workflow, private campaign state and scheduling.
 
 The agent distro approach is inspired by [Firstmate](https://github.com/kunchenguid/firstmate),
