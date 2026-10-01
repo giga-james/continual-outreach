@@ -14,12 +14,12 @@
 
 ## What it is
 
-**Continual Outreach turns your coding agent into a customer-discovery and outreach agent.**
+**Continual Outreach is an agent distro for customer discovery and outreach.**
 Tell it your product idea and who you want to learn from. It helps sharpen your ideal
 customer profile, researches people on the internet, personalizes outreach, tracks
 responses, and uses what it learns to improve the next batch.
 
-It is an **agent distro**: a portable bundle of instructions, skills and scripts that
+It bundles portable instructions, skills and scripts that
 runs with Codex, Claude Code or your preferred agent. You bring the agent and its browser
 and export tools; the repo supplies the workflow, private campaign state and scheduling.
 
