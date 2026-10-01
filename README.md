@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Agent-Independent-6366f1" alt="Agent independent">
+  <img src="https://img.shields.io/badge/Agent-Distro-6366f1" alt="Agent Distro">
   <img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white" alt="Python 3.9+">
   <img src="https://img.shields.io/badge/Status-Experimental-f4a7c3" alt="Experimental">
   <a href="https://x.com/kunggaochicken"><img src="https://img.shields.io/badge/Follow-%40kunggaochicken-000000?logo=x&logoColor=white" alt="Follow @kunggaochicken on X"></a>
