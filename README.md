@@ -9,6 +9,22 @@
   <a href="https://x.com/kunggaochicken"><img src="https://img.shields.io/badge/Follow-%40kunggaochicken-000000?logo=x&logoColor=white" alt="Follow @kunggaochicken on X"></a>
 </p>
 
+## What it is
+
+**Continual Outreach turns your coding agent into a customer-discovery and outreach agent.**
+Tell it your product idea and who you want to learn from. It helps sharpen your ideal
+customer profile, researches people on the internet, personalizes outreach, tracks
+responses, and uses what it learns to improve the next batch.
+
+It is an **agent distro**: a portable bundle of instructions, skills and scripts that
+runs with Codex, Claude Code or your preferred agent. You bring the agent and its browser
+and export tools; the repo supplies the workflow, private campaign state and scheduling.
+
+Start with a hypothetical idea or an existing product. Optionally add GitHub repos,
+documents or interview notes as context. You approve the outreach scope; the agent works
+within it and keeps exploring new profiles alongside those that get useful responses.
+
+## See it in action
 
 <p align="center">
   <a href="assets/walkthrough.mp4"><img src="assets/walkthrough.gif" width="100%" alt="Animated mock walkthrough: a Codex-inspired chat and side browser research support operations leads who personally maintain help articles."></a>
@@ -21,19 +37,6 @@ interviews with support operations leads at B2B SaaS companies who personally re
 recurring tickets and update help articles every week. The agent turns that brief into
 qualification criteria, researches candidates on the internet, verifies a LinkedIn profile and prepares
 an approved, specific invitation.
-
-
-A **specialized continual-outreach agent**, packaged as a portable distro of instructions,
-skills and scripts. Run it with Codex, Claude Code or your preferred agent. Tell it what
-you want to learn; it handles campaign formulation, research, outreach and feedback.
-
-Start with a hypothetical idea or an existing product. Add GitHub repos, local codebases,
-documents or interview notes when useful. You choose the context; the agent never assumes
-that the codebase where it is running is the product you want to market.
-
-Between batches, it uses useful responses to refine the next set of profiles while
-preserving room to explore. The repository supplies shared instructions, campaign state
-and reliable scheduling scripts. You supply the agent and its authenticated tools.
 
 <p align="center">
   <a href="#start">Start</a> ·
