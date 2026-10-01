@@ -21,7 +21,7 @@ An **agent distro** is a portable package that gives a general-purpose AI agent 
 specialized job: instructions define how it works, skills handle particular tasks,
 scripts make repeated operations reliable, and state conventions let it resume later.
 
-**This repository is that package.** Open Codex, Claude Code or another compatible agent
+**This repository is that package.** Open Codex, Claude Code or another harness
 in it—or load its instructions from your existing workspace—and that agent follows the
 continual-outreach workflow. Your chosen agent supplies the model, browser access and
 connected tools. This repo supplies the outreach expertise, campaign tracking, scheduling
