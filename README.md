@@ -17,9 +17,15 @@ Tell it your product idea and who you want to learn from. It helps sharpen your 
 customer profile, researches people on the internet, personalizes outreach, tracks
 responses, and uses what it learns to improve the next batch.
 
-It bundles portable instructions, skills and scripts that
-run with Codex, Claude Code or your preferred agent. You bring the agent and its browser
-and export tools; the repo supplies the workflow, private campaign state and scheduling.
+An **agent distro** is a portable package that gives a general-purpose AI agent a
+specialized job: instructions define how it works, skills handle particular tasks,
+scripts make repeated operations reliable, and state conventions let it resume later.
+
+**This repository is that package.** Open Codex, Claude Code or another compatible agent
+in it—or load its instructions from your existing workspace—and that agent follows the
+continual-outreach workflow. Your chosen agent supplies the model, browser access and
+connected tools. This repo supplies the outreach expertise, campaign tracking, scheduling
+helpers and feedback loop. Private campaign data stays separate from the reusable package.
 
 The agent distro approach is inspired by [Firstmate](https://github.com/kunchenguid/firstmate),
 created by [kunchenguid](https://github.com/kunchenguid).
