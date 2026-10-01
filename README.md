@@ -18,7 +18,7 @@
 **The example:** a founder building a support documentation tool wants 15-minute
 interviews with support operations leads at B2B SaaS companies who personally review
 recurring tickets and update help articles every week. The agent turns that brief into
-qualification criteria, finds source evidence, verifies a LinkedIn profile and prepares
+qualification criteria, researches candidates on the internet, verifies a LinkedIn profile and prepares
 an approved, specific invitation.
 
 
