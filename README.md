@@ -187,6 +187,10 @@ python3 scripts/campaign.py --campaign campaigns/my-campaign status
 python3 -m unittest discover -s tests -v
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, validation and pull-request guidelines.
+
 ---
 
 [Portable entrypoint](OUTREACH.md) · [Outreach skill](.agents/skills/outreach/SKILL.md) ·
