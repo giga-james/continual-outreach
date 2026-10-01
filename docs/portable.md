@@ -5,11 +5,13 @@ state conventions, inspired by [Firstmate](https://github.com/kunchenguid/firstm
 The source checkout is the distro. Agents use it from their current product workspace;
 cloning it does not require moving your coding session into it.
 
-## Ask your current agent
+## Optional: use it from your current workspace
 
 > Load /absolute/path/to/continual-outreach/OUTREACH.md and help me start an outreach campaign.
 
-The agent offers broad starting suggestions when your intent is unclear. For example:
+The specialized agent handles its internal skills and setup. It offers broad starting
+suggestions when your intent is unclear. You may choose multiple GitHub repositories,
+local projects, documents or interview notes as context, or use no sources at all. For example:
 
 > I’m considering a new product for independent designers. Help me explore the ICP.
 

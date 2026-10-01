@@ -1,6 +1,8 @@
 ---
 name: outreach
 description: Interview a founder for an ICP, research and qualify prospects, prepare personalized outreach, operate authorized browser outreach, and audit cohorts to improve candidate selection. Use for campaigns in Continual Outreach.
+metadata:
+  internal: true
 ---
 
 # Outreach
@@ -10,7 +12,8 @@ Resolve the distro root, context workspace and selected private campaign via
 the selected campaign. All workflow paths below are relative to the distro, not the
 host workspace; `campaigns/<slug>` means the selected private campaign directory. Read its
 `campaign.json`, `checkpoint.md`, latest audit, and ledger status before external actions.
-If there is no campaign, start the interview in [interview.md](references/interview.md).
+For a new idea or revised context, load the sibling `../campaign-context/SKILL.md` first.
+If there is no campaign, then start [interview.md](references/interview.md).
 Ask only what is missing from the conversation, one short group of questions at a time.
 
 The core is continual profile selection from response feedback, with deliberate exploration.

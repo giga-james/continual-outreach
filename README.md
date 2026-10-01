@@ -22,51 +22,45 @@ qualification criteria, researches candidates on the internet, verifies a Linked
 an approved, specific invitation.
 
 
-An **agent distro for continual outreach**: portable instructions, skills and tools for
-Codex, Claude Code, or any agent that can read files and use the required tools. Use it
-from your current workspace or run it standalone. Explore a hypothetical product, shape
-a campaign from a brief, or continue an existing campaign. Codebase context is an
-optional supplement you choose—not an assumption about what you want to market.
+A **specialized continual-outreach agent**, packaged as a portable distro of instructions,
+skills and scripts. Run it with Codex, Claude Code or your preferred agent. Tell it what
+you want to learn; it handles campaign formulation, research, outreach and feedback.
+
+Start with a hypothetical idea or an existing product. Add GitHub repos, local codebases,
+documents or interview notes when useful. You choose the context; the agent never assumes
+that the codebase where it is running is the product you want to market.
 
 Between batches, it uses useful responses to refine the next set of profiles while
 preserving room to explore. The repository supplies shared instructions, campaign state
 and reliable scheduling scripts. You supply the agent and its authenticated tools.
 
 <p align="center">
-  <a href="#start-from-any-workspace">Start</a> ·
+  <a href="#start">Start</a> ·
   <a href="#architecture">Architecture</a> ·
   <a href="#the-feedback-loop">Feedback loop</a> ·
   <a href="docs/scheduling.md">Scheduling</a> ·
   <a href="docs/exports.md">Exports</a>
 </p>
 
-## Start from any workspace
+## Start
 
-Clone or fork this repository once, then stay in the workspace where you already work.
-Tell your agent (substitute the actual clone path):
+Clone or fork the repo, open your preferred agent in it, and say:
 
-> Read /absolute/path/to/continual-outreach/OUTREACH.md and help me start an outreach campaign.
+> Help me figure out who to reach out to for my product idea.
 
-If your intent is unclear, the agent offers a few starting directions:
+Or bring context:
 
-- **Explore an idea:** a new or hypothetical product and who might want it.
-- **Shape a campaign:** use an existing product brief or docs you choose.
-- **Continue a campaign:** review responses and improve the next batch.
+> I’m exploring a product for support teams. Use this GitHub repo and these interview
+> notes to help sharpen the ICP, then find people I can learn from.
 
-It also offers relevant codebase context as an optional supplement. It will not inspect
-product code or assume the current repository is your product unless you choose that.
+That is the front door. The agent asks about your goal, offers useful starting directions
+and handles its internal skills, campaign files and optional scheduling. There is no
+mandatory codebase selection or setup questionnaire.
 
-For easy discovery in later sessions, ask:
-
-> Install the continual-outreach workspace skill here. Preserve my existing agent instructions.
-
-The agent runs the bundled installer and adds small skill loaders for the workspace.
-Your existing `AGENTS.md` and `CLAUDE.md` stay untouched. Other agents can read the same
-loader as Markdown. Private campaigns live outside the product workspace. See
-[Portable workspaces](docs/portable.md) for setup, state locations and scheduling.
-
-**Standalone also works:** open your agent in this clone and say, “Start an outreach
-campaign. Help me choose where to begin.”
+**Already working in another workspace?** Tell your agent to read this clone's
+`OUTREACH.md`. It takes on the same outreach role while preserving that workspace's
+instructions. [Optional workspace integration](docs/portable.md) makes it discoverable
+in later sessions; it is not required to begin.
 
 The agent helps you define:
 

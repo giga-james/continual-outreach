@@ -1,6 +1,7 @@
 # Continual Outreach
 
-This repository runs research and outreach campaigns through the agent the user chooses
+This repository specializes the chosen agent for continual outreach. It bundles internal
+skills and reliable scripts behind one conversational entrypoint. It runs campaigns through the agent the user chooses
 (Codex, Claude, or another agent). These are canonical agent-independent instructions. When the user says
 “start”, “continue”, or asks for prospecting, read `OUTREACH.md`, then load
 `.agents/skills/outreach/SKILL.md`. OUTREACH.md also supports using this distro from a
