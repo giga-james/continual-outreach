@@ -25,6 +25,28 @@ class Runner(unittest.TestCase):
         self.assertEqual(m.run(self.config,self.root),0)
         self.assertEqual(self.status()['status'],'completed')
         self.assertEqual(next((self.c/'runs').glob('*/output.log')).read_text().strip(),'ok')
+    def test_bound_workspace_and_distro_prompt(self):
+        host=self.root/'host project';host.mkdir()
+        (self.c/'workspace.json').write_text(json.dumps({
+            'version':1,'workspace_root':str(host),'distro_root':str(self.root)}))
+        self.config_for('import os,sys; print(os.getcwd()); print(sys.stdin.read())')
+        self.assertEqual(m.run(self.config,self.root),0)
+        log=next((self.c/'runs').glob('*/output.log')).read_text()
+        self.assertEqual(log.splitlines()[0],str(host.resolve()))
+        self.assertIn(str(self.root.resolve()/'OUTREACH.md'),log)
+        self.assertIn('Selected campaign directory: '+str(self.c.resolve()),log)
+    def test_missing_workspace_stops_before_launch(self):
+        (self.c/'workspace.json').write_text(json.dumps({
+            'version':1,'workspace_root':str(self.root/'missing'),'distro_root':str(self.root)}))
+        self.config_for('raise RuntimeError("must not launch")')
+        with self.assertRaises(FileNotFoundError): m.run(self.config,self.root)
+        self.assertFalse((self.c/'runs').exists())
+    def test_moved_distro_stops_before_launch(self):
+        (self.c/'workspace.json').write_text(json.dumps({
+            'version':1,'workspace_root':str(self.root),'distro_root':str(self.root/'old')}))
+        self.config_for('raise RuntimeError("must not launch")')
+        with self.assertRaises(ValueError): m.run(self.config,self.root)
+        self.assertFalse((self.c/'runs').exists())
     def test_failure_propagated_no_retry(self):
         self.config_for('raise SystemExit(7)')
         self.assertEqual(m.run(self.config,self.root),7)

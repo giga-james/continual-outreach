@@ -35,6 +35,19 @@ required capability is missing, explain the specific action needed and retain re
 draft mode. If an unusual runtime cannot be configured from available documentation,
 ask for its launch details as a fallback. Do not claim scheduling is active until verified.
 
+## Workspace context
+
+The agent runs the distro's runner by absolute path with the selected campaign's absolute
+`runner.json` path. For a portable campaign, the runner reads `workspace.json`, sets the
+agent's working directory to the bound product workspace and passes explicit distro and
+campaign paths in the prompt. The distro checkout still owns the shared local run lock.
+The same campaign opened from another agent keeps its existing scheduler and ledger.
+
+A missing workspace or mismatched distro path fails before launching the agent. When a
+workspace/distro moves, reconcile the binding and scheduler paths with the user rather
+than creating duplicate state. Unbound standalone campaigns retain the distro working
+directory. See [Portable workspaces](portable.md).
+
 ## Runner reference
 
 These are implementation details for the agent and advanced users. The agent generates

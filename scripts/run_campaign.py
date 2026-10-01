@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a user-configured agent once, serialized across campaigns on this checkout."""
+"""Run a configured agent in its bound workspace, serialized per distro checkout."""
 import argparse
 import fcntl
 import json
@@ -26,6 +26,21 @@ def run(config_path, root=ROOT):
     campaign = config_path.parent
     if not (campaign/'campaign.json').is_file():
         raise ValueError('Place runner.json beside an initialized campaign.json')
+    root = Path(root).resolve()
+    workspace = root
+    binding_file = campaign/'workspace.json'
+    if binding_file.exists():
+        binding = json.loads(binding_file.read_text())
+        if binding.get('version') != 1:
+            raise ValueError('Unsupported workspace binding version')
+        for key in ('workspace_root', 'distro_root'):
+            if not isinstance(binding.get(key), str) or not Path(binding[key]).is_absolute():
+                raise ValueError(f'Workspace binding requires an absolute {key}')
+        if Path(binding['distro_root']).resolve() != root:
+            raise ValueError('Distro moved; reconcile the campaign binding before running')
+        workspace = Path(binding['workspace_root']).resolve(strict=True)
+        if not workspace.is_dir():
+            raise ValueError('Bound workspace is not a directory')
     runtime = root/'.runtime'
     runtime.mkdir(mode=0o700, exist_ok=True)
     with (runtime/'agent.lock').open('a') as lock:
@@ -37,7 +52,10 @@ def run(config_path, root=ROOT):
         run_id = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S') + '-' + uuid.uuid4().hex[:12]
         out = campaign/'runs'/run_id
         out.mkdir(parents=True, mode=0o700)
-        prompt = (root/'prompts/daily.md').read_text()
+        prompt = ('Distro root: ' + str(root) + '\nContext workspace: ' + str(workspace)
+                  + '\nRead the host workspace instructions, then ' + str(root/'OUTREACH.md')
+                  + '. Resolve workflow scripts/docs/skills against the distro root, never the host workspace.\n\n')
+        prompt += (root/'prompts/daily.md').read_text()
         prompt += '\n\nSelected campaign directory: ' + str(campaign) + '\nUnattended run: if required user input or authorization is missing, record needs_input in checkpoint.md and stop sends; do not wait indefinitely or invent answers.\n'
         prompt_file = out/'prompt.txt'
         prompt_file.write_text(prompt)
@@ -49,7 +67,7 @@ def run(config_path, root=ROOT):
         process = None
         try:
             with (out/'output.log').open('w') as log:
-                process = subprocess.Popen(argv, cwd=root, stdin=subprocess.PIPE,
+                process = subprocess.Popen(argv, cwd=workspace, stdin=subprocess.PIPE,
                                            stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
                 try:
                     process.communicate(prompt.encode(), timeout=timeout)

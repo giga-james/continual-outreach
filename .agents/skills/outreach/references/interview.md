@@ -1,7 +1,15 @@
 # ICP interview
 
-Begin with: “What are you building, whose work should improve, and what would make a
-conversation useful?” Use information already supplied; do not force a questionnaire.
+Follow intent-first onboarding in `OUTREACH.md` at the distro root. If intent is unclear,
+offer starting suggestions: explore a new/hypothetical idea, shape a campaign from a
+product brief, or resume an existing campaign. Mention codebase context as an optional
+supplement, not the presumed product. Do not inspect product source until selected.
+
+When codebase context is explicitly requested, follow the context-reading procedure and
+present a source-backed hypothesis. Otherwise begin from the user's chosen idea or brief:
+“What are you building or considering, whose work should improve, and what would make a
+conversation useful?” Ask about gaps instead of repeating known facts. Internal context
+stays private unless approved for disclosure.
 
 Then ask two or three questions at a time to resolve:
 

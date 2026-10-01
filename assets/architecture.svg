@@ -8,13 +8,13 @@
 <text x="48" y="118" fill="#94a3b8" font-size="16">Set direction once. Improve who you reach with evidence from each batch.</text>
 
 <rect x="48" y="155" width="310" height="100" rx="12" fill="#1e293b" stroke="#334155"/>
-<text x="68" y="187" fill="#f8fafc" font-size="18" font-weight="600">01  Fork + open your agent</text>
-<text x="68" y="213" fill="#cbd5e1" font-size="14">Codex, Claude Code or another agent</text>
-<text x="68" y="236" fill="#cbd5e1" font-size="14">Shared Markdown instructions</text>
+<text x="68" y="187" fill="#f8fafc" font-size="18" font-weight="600">01  Load the distro</text>
+<text x="68" y="213" fill="#cbd5e1" font-size="14">Your current agent + workspace</text>
+<text x="68" y="236" fill="#cbd5e1" font-size="14">Explore an idea or resume a campaign</text>
 <rect x="406" y="155" width="360" height="100" rx="12" fill="#1e293b" stroke="#334155"/>
 <text x="426" y="187" fill="#f8fafc" font-size="18" font-weight="600">02  Interview + configure</text>
 <text x="426" y="213" fill="#cbd5e1" font-size="14">ICP · channel · message · authorization</text>
-<text x="426" y="236" fill="#cbd5e1" font-size="14">Export destination · success criteria</text>
+<text x="426" y="236" fill="#cbd5e1" font-size="14">Optional context · success criteria</text>
 <rect x="814" y="155" width="338" height="100" rx="12" fill="#1e293b" stroke="#334155"/>
 <text x="834" y="187" fill="#f8fafc" font-size="18" font-weight="600">Scheduler</text>
 <text x="834" y="213" fill="#cbd5e1" font-size="14">Cron or your agent app</text>
@@ -48,7 +48,7 @@
 <text x="68" y="582" fill="#f8fafc" font-size="18" font-weight="600">Private campaign state</text>
 <text x="68" y="608" fill="#cbd5e1" font-size="14">ICP, prospects, messages, replies, audits and run logs</text>
 <text x="68" y="631" fill="#cbd5e1" font-size="14">Local ledger: duplicates · quotas · unresolved sends · holds</text>
-<text x="68" y="654" fill="#cbd5e1" font-size="14">Ignored by Git; back up privately</text>
+<text x="68" y="654" fill="#cbd5e1" font-size="14">Outside product repos; back up privately</text>
 <rect x="624" y="550" width="528" height="132" rx="12" fill="#1e293b" stroke="#334155"/>
 <text x="644" y="582" fill="#f8fafc" font-size="18" font-weight="600">Operational boundary</text>
 <text x="644" y="608" fill="#cbd5e1" font-size="14">Agent owns research, browser actions and connectors</text>

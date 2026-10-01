@@ -2,10 +2,14 @@
 
 This repository runs research and outreach campaigns through the agent the user chooses
 (Codex, Claude, or another agent). These are canonical agent-independent instructions. When the user says
-“start”, “continue”, or asks for prospecting, load `.agents/skills/outreach/SKILL.md`.
+“start”, “continue”, or asks for prospecting, read `OUTREACH.md`, then load
+`.agents/skills/outreach/SKILL.md`. OUTREACH.md also supports using this distro from a
+different product workspace; do not replace that workspace’s own agent instructions.
 On first start, interview the user before creating a campaign. Do not assume example configuration defines their ICP or authorizes any communication.
 
-Campaign data belongs in ignored `campaigns/`. Code and generic instructions may be
+Standalone campaign data belongs in ignored `campaigns/`. Portable campaigns use the
+external private location established by `scripts/workspace.py`; never put campaign data
+in a host product repository. Code and generic instructions may be
 committed; prospect records, messages, replies and credentials must not be committed.
 Never read browser cookies or credentials. Use the provided computer-use/browser tools
 for browser interactions, and connector APIs for spreadsheets. No hidden HTTP endpoints,
@@ -36,3 +40,7 @@ After the ICP and messaging direction are settled, automatically start/resume th
 agent's supported computer-use browser session and begin research. Follow the skill's
 `references/browser.md`; do not ask the user to wire up tools already available to you.
 Keep research access separate from send authorization, and report missing capabilities.
+
+On portable invocation, follow OUTREACH.md's intent-first start: offer new/hypothetical
+idea, existing product brief, or campaign continuation when the goal is unclear. The
+current codebase is an optional supplement; read product context only when selected.

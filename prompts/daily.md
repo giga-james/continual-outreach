@@ -1,4 +1,7 @@
-Continue the selected Continual Outreach campaign from this repository by reading AGENTS.md and .agents/skills/outreach/SKILL.md.
+Continue the selected Continual Outreach campaign. Resolve the distro root and context
+workspace from the runner prompt or existing campaign binding. Read OUTREACH.md and
+.agents/skills/outreach/SKILL.md under the distro root; keep the context workspace’s own
+agent instructions in force. For a standalone run, this repository is the distro root.
 Read the campaign checkpoint, config, latest audit, ledger and live tracker first.
 If no campaign is selected or onboarding/authorization is incomplete, request only the
 missing information and do not send. Never interpret this scheduler prompt as consent.

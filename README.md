@@ -22,30 +22,51 @@ qualification criteria, researches candidates on the internet, verifies a Linked
 an approved, specific invitation.
 
 
-A reusable outreach workflow for **any agent that can read files and use the required tools**:
-Codex, Claude Code, or your preferred agent. Fork the repository, start a conversation,
-and let your agent interview you about your ideal customers, outreach channel, messaging
-and tracking destination.
+An **agent distro for continual outreach**: portable instructions, skills and tools for
+Codex, Claude Code, or any agent that can read files and use the required tools. Use it
+from your current workspace or run it standalone. Explore a hypothetical product, shape
+a campaign from a brief, or continue an existing campaign. Codebase context is an
+optional supplement you choose—not an assumption about what you want to market.
 
 Between batches, it uses useful responses to refine the next set of profiles while
 preserving room to explore. The repository supplies shared instructions, campaign state
 and reliable scheduling scripts. You supply the agent and its authenticated tools.
 
 <p align="center">
-  <a href="#start">Start</a> ·
+  <a href="#start-from-any-workspace">Start</a> ·
   <a href="#architecture">Architecture</a> ·
   <a href="#the-feedback-loop">Feedback loop</a> ·
   <a href="docs/scheduling.md">Scheduling</a> ·
   <a href="docs/exports.md">Exports</a>
 </p>
 
-## Start
+## Start from any workspace
 
-1. **Fork and clone** this repository.
-2. **Open your agent** in the cloned directory.
-3. **Start the interview:**
+Clone or fork this repository once, then stay in the workspace where you already work.
+Tell your agent (substitute the actual clone path):
 
-> Read AGENTS.md and start a new outreach campaign. Interview me.
+> Read /absolute/path/to/continual-outreach/OUTREACH.md and help me start an outreach campaign.
+
+If your intent is unclear, the agent offers a few starting directions:
+
+- **Explore an idea:** a new or hypothetical product and who might want it.
+- **Shape a campaign:** use an existing product brief or docs you choose.
+- **Continue a campaign:** review responses and improve the next batch.
+
+It also offers relevant codebase context as an optional supplement. It will not inspect
+product code or assume the current repository is your product unless you choose that.
+
+For easy discovery in later sessions, ask:
+
+> Install the continual-outreach workspace skill here. Preserve my existing agent instructions.
+
+The agent runs the bundled installer and adds small skill loaders for the workspace.
+Your existing `AGENTS.md` and `CLAUDE.md` stay untouched. Other agents can read the same
+loader as Markdown. Private campaigns live outside the product workspace. See
+[Portable workspaces](docs/portable.md) for setup, state locations and scheduling.
+
+**Standalone also works:** open your agent in this clone and say, “Start an outreach
+campaign. Help me choose where to begin.”
 
 The agent helps you define:
 
@@ -63,10 +84,10 @@ actually owns the relevant work, saves a private campaign and shows personalized
 It also checks export access. Sending begins only within your authorization; that authorization carries
 forward within its scope.
 
-**No specific agent runtime is required.** [AGENTS.md](AGENTS.md) is the shared entry
-point. [CLAUDE.md](CLAUDE.md) points Claude to it; agents with skill discovery can load
-[the outreach skill](.agents/skills/outreach/SKILL.md). Every instruction is ordinary
-Markdown, so agents without a skill loader can read the same workflow directly.
+**No specific agent runtime is required.** [OUTREACH.md](OUTREACH.md) is the portable
+entrypoint. In the distro itself, [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md) route
+to it. Every instruction is ordinary Markdown, so agents without skill discovery can
+read the same workflow directly.
 
 ## Architecture
 
@@ -141,8 +162,10 @@ See [Scheduling](docs/scheduling.md) for the agent setup procedure and manual re
 
 ## Private state and tracking
 
-Campaign configuration, prospect records, messages, replies, audits and run logs live
-in ignored `campaigns/`. Keep a private backup: these files are not included in your fork.
+Portable campaigns keep configuration, prospects, messages, replies, audits and run logs
+outside the product workspace, by default under `~/.local/share/continual-outreach/`.
+Standalone campaigns can use ignored `campaigns/` in the distro. Keep a private backup:
+these records are not included in your fork.
 The repository contains only a [generic, draft-mode example](examples/campaign.json).
 
 Exports use stable IDs and are verified after each send or skip. If synchronization
@@ -158,5 +181,5 @@ python3 -m unittest discover -s tests -v
 
 ---
 
-[Agent instructions](AGENTS.md) · [Outreach skill](.agents/skills/outreach/SKILL.md) ·
+[Portable entrypoint](OUTREACH.md) · [Outreach skill](.agents/skills/outreach/SKILL.md) ·
 [Scheduling](docs/scheduling.md) · [Exports](docs/exports.md)

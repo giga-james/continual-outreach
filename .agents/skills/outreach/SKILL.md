@@ -5,7 +5,10 @@ description: Interview a founder for an ICP, research and qualify prospects, pre
 
 # Outreach
 
-Resolve the repository root and work only on the selected campaign. Read its
+Resolve the distro root, context workspace and selected private campaign via
+`OUTREACH.md` at the distro root. Follow host workspace instructions and work only on
+the selected campaign. All workflow paths below are relative to the distro, not the
+host workspace; `campaigns/<slug>` means the selected private campaign directory. Read its
 `campaign.json`, `checkpoint.md`, latest audit, and ledger status before external actions.
 If there is no campaign, start the interview in [interview.md](references/interview.md).
 Ask only what is missing from the conversation, one short group of questions at a time.
