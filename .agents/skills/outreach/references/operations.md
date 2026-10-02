@@ -12,6 +12,9 @@ Before each run:
    evidence for the complete account send count; if unavailable, stay draft-only.
 2. Check pause, platform warnings, daily/rolling caps and cohort audits. Initial pauses
    do not expire into authorization. Review `authorization` and `send_authorized`.
+   If only a campaign-configured cap blocks sending, offer an explicit override with a
+   maximum number of additional requests and a batch boundary. Do not present this cap
+   as a LinkedIn limit. If already approved, proceed without repeat confirmation.
 3. Verify recipient identity, current role, work, qualification and competitive risk.
    Inspect their live profile: skip existing connections or pending requests. No InMail,
    withdrawal or follow-up DM unless separately requested.
@@ -19,6 +22,16 @@ Before each run:
 5. Reserve immediately before the final Send, then click once. Verify a sent toast or
    Pending state. Resolve the reservation, update the tracker and verify the write before
    proceeding. On uncertainty, resolve as `unknown`, stop sends and inspect later.
+
+For an approved cap override, record the user's instruction, approval time, original
+caps, additional-request ceiling, target cohort and expiry in the private campaign
+configuration and checkpoint. After reconciling account history, temporarily set the
+effective caps to the observed daily/rolling counts plus the approved additional ceiling;
+track that ceiling across restarts. Clear only the cap-related hold, retain other gates,
+and restore the original caps when the batch completes, expires or is stopped. Do not
+delete history, rotate cohorts, fabricate audits or mark incomplete history reconciled
+to activate an override. A cap override is not authorization for new recipients, revised
+messages, a recurring schedule, or bypassing a platform warning or restriction.
 
 Commands from repository root (replace the campaign directory and URLs):
 
