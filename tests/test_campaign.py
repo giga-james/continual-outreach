@@ -32,6 +32,15 @@ class Gates(unittest.TestCase):
     def test_daily_cap(self):
         for i in range(10): self.add(i)
         self.assertIn('Daily cap reached',m.gate(self.c,self.db,self.now)['reasons'])
+    def test_explicit_history_override_expires_and_preserves_unknown_gate(self):
+        self.c['reconciled_at']=None
+        self.c['history_override']={'approved': True, 'user_instruction': 'Proceed with incomplete history',
+            'approved_at': self.now.isoformat(), 'expires_at': (self.now+timedelta(hours=1)).isoformat()}
+        self.assertTrue(m.gate(self.c,self.db,self.now)['allowed'])
+        self.assertFalse(m.gate(self.c,self.db,self.now+timedelta(hours=1))['allowed'])
+        m.reserve(self.c,self.db,self.now,'https://www.linkedin.com/in/test/','c1','note')
+        m.resolve(self.db,self.now,'https://www.linkedin.com/in/test/','unknown','No confirmation')
+        self.assertFalse(m.gate(self.c,self.db,self.now)['allowed'])
     def test_rolling_boundary(self):
         self.c['cohort_size']=100
         for i in range(50): self.add(i,self.now-timedelta(days=6))

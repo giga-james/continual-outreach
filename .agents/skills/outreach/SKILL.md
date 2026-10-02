@@ -58,8 +58,13 @@ explain the observed count and configured cap, distinguish it from a platform re
 and offer a concrete one-batch override instead of only reporting a hold. Carry explicit
 override approval forward without asking again; record its scope and expiry, apply it to
 the local gate, and restore the prior caps when the batch ends. An override does not waive
-recipient checks, account-history reconciliation, uncertain-send recovery, or platform
+recipient checks, uncertain-send recovery, or platform
 warnings. See [operations.md](references/operations.md) for recording the override.
+
+Incomplete account history is a separate, overridable workflow constraint. Explain the
+known counts and gaps, and honor explicit user approval to proceed with that uncertainty.
+Record a bounded history override without claiming the account has been reconciled.
+Keep recipient-state checks and reconciliation of every attempted send mandatory.
 
 Use provided browser/computer-use tools; if absent, do research/drafting only and explain
 what is missing. A CLI session does not automatically provide the desktop browser tool.

@@ -47,7 +47,11 @@ def gate(config, db, now):
     if config.get('not_before') and now < stamp(config['not_before']):
         reasons.append('Initial hold has not expired')
     reconciled = config.get('reconciled_at')
-    if not reconciled or not timedelta(0) <= now - stamp(reconciled) <= timedelta(hours=24):
+    waiver = config.get('history_override', {})
+    waived = (waiver.get('approved') is True and bool(waiver.get('user_instruction'))
+              and bool(waiver.get('approved_at')) and bool(waiver.get('expires_at'))
+              and stamp(waiver['approved_at']) <= now < stamp(waiver['expires_at']))
+    if not waived and (not reconciled or not timedelta(0) <= now - stamp(reconciled) <= timedelta(hours=24)):
         reasons.append('Reconcile all known account sends and tracker within 24 hours')
     rows = [dict(r) for r in db.execute('SELECT * FROM invitations')]
     if any(r['state'] in ('reserved', 'unknown') for r in rows):
