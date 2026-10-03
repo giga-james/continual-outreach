@@ -76,9 +76,8 @@ small before/after example when it makes the change easier to understand. Call o
 new dependency, state migration, behavior limitation or untested integration.
 
 The active `main` ruleset requires one approving review from a code owner:
-[@giga-james](https://github.com/giga-james) or
-[@giga-dylan](https://github.com/giga-dylan). Either owner's approval satisfies the
-code-owner requirement; authors cannot approve their own pull requests. Maintainers
+[@giga-james](https://github.com/giga-james). Authors cannot approve their own pull
+requests. Maintainers
 have configured bypass permissions, but contributions should follow the pull-request
 review process. See [CODEOWNERS](.github/CODEOWNERS).
 
